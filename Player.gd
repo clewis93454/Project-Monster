@@ -2,10 +2,11 @@ extends KinematicBody2D
 
 signal enemy_collision
 
+const velocity_multiplier = 200
 onready var _animated_sprite = $AnimatedSprite
 onready var direction = 'down'
 
-func read_input():
+func read_input(delta):
 	var velocity: Vector2 = Vector2()
 	
 	if Input.is_action_pressed("player_up"):
@@ -28,7 +29,9 @@ func read_input():
 	
 	play_movement_animations(velocity, direction)
 	
-	velocity = move_and_slide(velocity * 200)
+	var collision = move_and_collide(velocity * velocity_multiplier * delta)
+	if collision:
+		handle_collision(collision)
 
 
 func play_movement_animations(velocity, direction):
@@ -61,16 +64,16 @@ func play_movement_animations(velocity, direction):
 		if velocity.x > 0:
 			_animated_sprite.set_flip_h(true)
 			_animated_sprite.play("side_move")
-	
 
-func _on_Player_body_entered(body):
-	print_debug(body)
-	emit_signal("enemy_collision")
+
+func handle_collision(collision):
+	var groups = collision.collider.get_groups()
+	
+	for group in groups:
+		if group == 'enemy':
+			get_tree().change_scene("res://scenes/Combat/Combat_Main.tscn")
+		else:
+			pass
 
 func _physics_process(delta):
-	read_input()
-
-
-func _on_KinematicBody2D_enemy_collision(body):
-	print_debug(body)
-	print_debug('colliding')
+	read_input(delta)

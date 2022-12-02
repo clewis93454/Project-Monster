@@ -204,6 +204,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 script = ExtResource( 5 )
 
 [node name="OverWorld" type="Node2D" parent="."]
+scale = Vector2( 2, 2 )
 
 [node name="TileMap" type="TileMap" parent="OverWorld"]
 tile_set = SubResource( 1 )

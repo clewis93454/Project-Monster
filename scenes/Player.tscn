@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/player_assets/_pick up.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 16 )
+extents = Vector2( 6.5, 5 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -206,12 +206,14 @@ animations = [ {
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, 0 )
+position = Vector2( 0.5, 11 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+z_index = 1
 frames = SubResource( 12 )
 animation = "down_idle"
+frame = 2
 speed_scale = 0.75
 playing = true
 

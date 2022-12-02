@@ -14,9 +14,10 @@ config/name="Project: Monster"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
-[display]
+[global]
 
-window/stretch/shrink=2.33
+font=false
+import=false
 
 [gui]
 
