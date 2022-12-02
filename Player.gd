@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal enemy_collision
+
 onready var _animated_sprite = $AnimatedSprite
 onready var direction = 'down'
 
@@ -59,6 +61,16 @@ func play_movement_animations(velocity, direction):
 		if velocity.x > 0:
 			_animated_sprite.set_flip_h(true)
 			_animated_sprite.play("side_move")
+	
+
+func _on_Player_body_entered(body):
+	print_debug(body)
+	emit_signal("enemy_collision")
 
 func _physics_process(delta):
 	read_input()
+
+
+func _on_KinematicBody2D_enemy_collision(body):
+	print_debug(body)
+	print_debug('colliding')
